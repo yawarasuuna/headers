@@ -1,5 +1,6 @@
 use std::env;
 
+use std::{thread, time};
 use clipboard::{ClipboardContext, ClipboardProvider};
 
 fn main() {
@@ -10,7 +11,7 @@ fn main() {
         "    /*//////////////////////////////////////////////////////////////",
         "    ",
         (0..(64 - input.len()) / 2).map(|_| " ").collect::<String>(),
-        input.to_uppercase(),
+        input,
         "    //////////////////////////////////////////////////////////////*/"
     );
 
@@ -19,4 +20,5 @@ fn main() {
     let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
 
     ctx.set_contents(output).unwrap(); // Copy the header to clipboard.
+    thread::sleep(time::Duration::from_millis(100)); 
 }
